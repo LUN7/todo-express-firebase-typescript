@@ -1,6 +1,22 @@
 {
   "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/helmet": "^4.0.0",
+    "@types/morgan": "^1.9.3",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.24",
+    "cors": "^2.8.5",
+    "firebase-admin": "^9.11.0",
+    "helmet": "^4.6.0",
+    "jest": "^27.0.6",
+    "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "start:prod": "NODE_PATH='src' ts-node ./src/server.ts",
+    "start:dev": "NODE_PATH='src' ts-node ./src/server.ts",
+    "test:watch": "jest --watch"
   }
 }
