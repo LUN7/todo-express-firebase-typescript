@@ -22,30 +22,36 @@ const UPDATED_TODO = {
 }
 
 describe('ToDo Service', () => {
-  let createdTodoId: string
+  let createdToDoId: string
+  let createdToDoCreatedTime: string
   it('should create todo', async () => {
     const createdToDo = await ToDoService.create(SAMPLE_TODO)
     expect(createdToDo.name).toBe(SAMPLE_TODO.name)
     expect(createdToDo.deadline).toBe(SAMPLE_TODO.deadline)
     expect(createdToDo.userId).toBe(SAMPLE_TODO.userId)
     expect(createdToDo.id).toBeDefined()
-    createdTodoId = createdToDo.id
+    expect(createdToDo.created).toBeDefined()
+    createdToDoId = createdToDo.id
+    createdToDoCreatedTime = createdToDo.created
   })
 
   it('should retrieve created todo', async () => {
-    expect(createdTodoId).toBeDefined()
-    const existingToDo = await ToDoService.retrieve(createdTodoId)
+    expect(createdToDoId).toBeDefined()
+    const existingToDo = await ToDoService.retrieve(createdToDoId)
     expect(existingToDo).toEqual({
       ...SAMPLE_TODO,
-      id: createdTodoId
+      id: createdToDoId,
+      created: createdToDoCreatedTime
     })
   })
 
   it('should update created todo', async () => {
-    expect(createdTodoId).toBeDefined()
-    const updatedToDo = await ToDoService.update(createdTodoId, { UPDATE_TODO_DATA })
+    expect(createdToDoId).toBeDefined()
+    const updatedToDo = await ToDoService.update(createdToDoId, { UPDATE_TODO_DATA })
     expect(updatedToDo).toEqual({
-      UPDATED_TODO
+      ...UPDATED_TODO,
+      id: createdToDoId,
+      created: createdToDoCreatedTime
     })
   })
 
@@ -55,11 +61,12 @@ describe('ToDo Service', () => {
   })
 
   it('should delete created todo', async () => {
-    expect(createdTodoId).toBeDefined()
-    const deletedToDo = await ToDoService.delete(createdTodoId)
+    expect(createdToDoId).toBeDefined()
+    const deletedToDo = await ToDoService.delete(createdToDoId)
     expect(deletedToDo).toEqual({
       ...SAMPLE_TODO,
-      id: createdTodoId
+      id: createdToDoId,
+      created: createdToDoCreatedTime
     })
   })
 })
