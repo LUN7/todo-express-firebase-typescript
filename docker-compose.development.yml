@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  todo-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env.development
+
+  todo-test:
+    context: .
+    target: test
+    volumes:
+      - .:/usr/src/app
+    env_file: .env.test
