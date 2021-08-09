@@ -9,14 +9,14 @@ EXPOSE 8080
 FROM node:12 as test
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app . 
-RUN yarn test:watch
+CMD yarn test:watch
 
 FROM node:12 as development
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app . 
-RUN yarn start:dev
+CMD yarn start:dev
 
 FROM node:12 as production
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app . 
-RUN yarn start:prod
+CMD yarn start:prod
