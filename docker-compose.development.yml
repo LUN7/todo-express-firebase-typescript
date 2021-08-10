@@ -10,10 +10,3 @@ services:
       - .:/usr/src/app
     env_file:
       - .env.development
-
-  todo-test:
-    context: .
-    target: test
-    volumes:
-      - .:/usr/src/app
-    env_file: .env.test

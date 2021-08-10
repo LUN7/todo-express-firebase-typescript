@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  todo-test:
+    build:
+      target: test
+      context: .
+    volumes:
+      - .:/usr/src/app
+    env_file: .env.test
