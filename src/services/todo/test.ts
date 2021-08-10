@@ -1,8 +1,8 @@
-import * as ToDoService from './todo'
+import toDoService from './todo'
 
 const TEST_USER_ID = "test-1212"
-const NOW = Date.now()
-const UPDATED_NOW = Date.now()
+const NOW = String(Date.now())
+const UPDATED_NOW = String(Date.now())
 
 const SAMPLE_TODO = {
   userId: TEST_USER_ID,
@@ -22,10 +22,10 @@ const UPDATED_TODO = {
 }
 
 describe('ToDo Service', () => {
-  let createdToDoId: string
-  let createdToDoCreatedTime: string
+  let createdToDoId: string;
+  let createdToDoCreatedTime: string;
   it('should create todo', async () => {
-    const createdToDo = await ToDoService.create(SAMPLE_TODO)
+    const createdToDo = await toDoService.create(SAMPLE_TODO)
     expect(createdToDo.name).toBe(SAMPLE_TODO.name)
     expect(createdToDo.deadline).toBe(SAMPLE_TODO.deadline)
     expect(createdToDo.userId).toBe(SAMPLE_TODO.userId)
@@ -37,7 +37,7 @@ describe('ToDo Service', () => {
 
   it('should retrieve created todo', async () => {
     expect(createdToDoId).toBeDefined()
-    const existingToDo = await ToDoService.retrieve(createdToDoId)
+    const existingToDo = await toDoService.retrieve(createdToDoId)
     expect(existingToDo).toEqual({
       ...SAMPLE_TODO,
       id: createdToDoId,
@@ -47,7 +47,7 @@ describe('ToDo Service', () => {
 
   it('should update created todo', async () => {
     expect(createdToDoId).toBeDefined()
-    const updatedToDo = await ToDoService.update(createdToDoId, { UPDATE_TODO_DATA })
+    const updatedToDo = await toDoService.update(createdToDoId, { ...UPDATE_TODO_DATA })
     expect(updatedToDo).toEqual({
       ...UPDATED_TODO,
       id: createdToDoId,
@@ -56,17 +56,12 @@ describe('ToDo Service', () => {
   })
 
   it('should list all todo', async () => {
-    const toDoList = await ToDoService.list(TEST_USER_ID)
+    const toDoList = await toDoService.list(TEST_USER_ID)
     expect(Array.isArray(toDoList)).toBeTruthy()
   })
 
   it('should delete created todo', async () => {
     expect(createdToDoId).toBeDefined()
-    const deletedToDo = await ToDoService.delete(createdToDoId)
-    expect(deletedToDo).toEqual({
-      ...SAMPLE_TODO,
-      id: createdToDoId,
-      created: createdToDoCreatedTime
-    })
+    return await toDoService.delete(createdToDoId)
   })
 })
