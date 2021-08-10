@@ -1,2 +1,2 @@
 #/bin/sh
-docker-compose -f docker-compose.development build
+docker-compose -f docker-compose.development.yml build
