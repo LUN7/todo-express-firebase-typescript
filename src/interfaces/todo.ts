@@ -1,7 +1,6 @@
-import * as user from "./user"
-
 export interface IToDo {
-  userId: user.IUser['id'],
+  id: string,
+  userId: string,
   name: string,
   created: string,
   deadline: string,
