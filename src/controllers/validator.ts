@@ -23,3 +23,9 @@ export const validateRetrieve = expressValidation.validate({
     id: Joi.string().required()
   }).required()
 })
+
+export const validateList = expressValidation.validate({
+  query: Joi.object({
+    userId: Joi.string().required()
+  }).required()
+})
