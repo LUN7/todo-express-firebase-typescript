@@ -196,7 +196,7 @@ describe('validate retrieve request', () => {
     } as unknown as express.Request
     const mockResponse = {} as unknown as express.Response
     const mockNextFunction = jest.fn();
-    await requestValidator.validateRetireve(request, mockResponse, mockNextFunction)
+    await requestValidator.validateRetrieve(request, mockResponse, mockNextFunction)
     expect(mockNextFunction.mock.calls.length).toBe(1)
     expect(mockNextFunction.mock.calls[0][0]).toBeNull()
   })
@@ -208,7 +208,7 @@ describe('validate retrieve request', () => {
     } as unknown as express.Request
     const mockResponse = {} as unknown as express.Response
     const mockNextFunction = jest.fn();
-    requestValidator.validateRetireve(request, mockResponse, mockNextFunction)
+    requestValidator.validateRetrieve(request, mockResponse, mockNextFunction)
     expect(mockNextFunction.mock.calls.length).toBe(1)
     expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
   })
