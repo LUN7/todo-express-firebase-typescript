@@ -6,9 +6,12 @@ import * as uuid from "uuid"
 type IToDo = todo.IToDo
 const todoRef = db.collection('todo')
 
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
   constructor(objectName: string) {
     super(`${objectName} not found`)
+    this.name = "Not Found Error"
+    Object.setPrototypeOf(this, NotFoundError.prototype);
+    // ref: https://stackoverflow.com/questions/55065742/implementing-instanceof-checks-for-custom-typescript-error-instances
   }
 }
 
