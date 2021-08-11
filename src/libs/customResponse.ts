@@ -2,7 +2,7 @@ import * as express from "express"
 
 export class SuccessResponse {
   status = "success";
-  data: Record<string, any>;
+  data: Record<string, any> | null;
   statusCode: number;
   private res: express.Response
 
