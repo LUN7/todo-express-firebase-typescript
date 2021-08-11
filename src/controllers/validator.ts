@@ -1,5 +1,18 @@
 import * as expressValidation from "express-validation"
 const Joi = expressValidation.Joi
+
+export const ValidationError = expressValidation.ValidationError
+
+export interface IValidationError extends Object {
+  details: {
+    query: {
+      message: string;
+    }[];
+  }
+}
+
+export const ErrorSerializer = (err: IValidationError) => err.details.query.map(({ message }) => message)
+
 export const validateCreate = expressValidation.validate({
   body: Joi.object({
     name: Joi.string().required(),
