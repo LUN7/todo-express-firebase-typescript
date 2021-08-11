@@ -69,6 +69,47 @@ All three test, development and production version of this project could be run 
 > docker-compose -f docker-compose.production.yml up --build
 ```
 
+## Sample Request
+
+### Create
+
+```
+POST  http://localhost:8000/to-do/v1/
+{
+  "userId": "lun",
+  "name": "todo-100",
+  "deadline": "1628690796918"
+}
+```
+
+### Update
+
+```
+POST  http://localhost:8000/to-do/v1/
+{
+  "name": "todo-100",
+  "deadline": "1628690796918"
+}
+```
+
+### Get
+
+```
+GET  http://localhost:8000/to-do/v1/sKlwneApxcIe3Ac3tl84
+```
+
+### Delete
+
+```
+Delete  http://localhost:8000/to-do/v1/sKlwneApxcIe3Ac3tl84
+```
+
+### List
+
+```
+GET  http://localhost:8000/to-do/v1/?userId=lun
+```
+
 # FAQ
 
 ## A. How to get firebase credential
