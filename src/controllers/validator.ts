@@ -5,15 +5,21 @@ export const validateCreate = expressValidation.validate({
     name: Joi.string().required(),
     userId: Joi.string().required(),
     deadline: Joi.date().timestamp('javascript').required(),
-  })
+  }).required()
 })
 
 export const validateUpdate = expressValidation.validate({
   params: Joi.object({
     id: Joi.string().required()
-  }),
+  }).required(),
   body: Joi.object({
     name: Joi.string(),
     deadline: Joi.date(),
-  })
+  }).required()
+})
+
+export const validateRetrieve = expressValidation.validate({
+  params: Joi.object({
+    id: Joi.string().required()
+  }).required()
 })
