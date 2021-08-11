@@ -255,8 +255,29 @@ describe('validate list request', () => {
   })
 })
 
-// describe('validate delete request', () => {
-//   it('should not throw error if request body is correct', () => {
-//     requestValidator.validateCreate()
-//   })
-// })
+describe('validate delete request', () => {
+  it('should invoke next function if id is provided', async () => {
+    const request = {
+      params: {
+        id: "asdsa"
+      }
+    } as unknown as express.Request
+    const mockResponse = {} as unknown as express.Response
+    const mockNextFunction = jest.fn();
+    await requestValidator.validateRetrieve(request, mockResponse, mockNextFunction)
+    expect(mockNextFunction.mock.calls.length).toBe(1)
+    expect(mockNextFunction.mock.calls[0][0]).toBeNull()
+  })
+  it('should invoke next function with error if id is not provided', async () => {
+    const request = {
+      params: {
+        id: "asdsa"
+      }
+    } as unknown as express.Request
+    const mockResponse = {} as unknown as express.Response
+    const mockNextFunction = jest.fn();
+    await requestValidator.validateRetrieve(request, mockResponse, mockNextFunction)
+    expect(mockNextFunction.mock.calls.length).toBe(1)
+    expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
+  })
+})
