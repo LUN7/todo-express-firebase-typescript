@@ -61,13 +61,16 @@ export default class App {
 
   private initializeErrorHandling() {
     this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      for (const controller of this.controllers) {
-        if (req.url.startsWith(controller.path)) {
-          controller.errorHandler(err, req, res, next)
+      try {
+        for (const controller of this.controllers) {
+          if (req.url.startsWith(controller.path)) {
+            controller.errorHandler(err, req, res, next)
+          }
         }
+      } catch (err) {
+        console.error('unhandled error', err)
+        res.send(400)
       }
-      console.log('uncaught exception', err.message)
-      return void res.send(400)
     })
   }
 
