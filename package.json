@@ -23,7 +23,7 @@
   "scripts": {
     "start:prod": "NODE_PATH='src' ts-node ./src/server.ts",
     "start:dev": "NODE_PATH='src' nodemon",
-    "start:dev:db": "firebase emulators:start --import=./db --export-on-exit=./db",
+    "start:dev:db": "firebase emulators:start --import=./dev-db --export-on-exit=./dev-db",
     "start:test:db": "firebase emulators:start",
     "test": "jest",
     "test:watch": "jest --watch"
