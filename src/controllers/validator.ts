@@ -29,3 +29,9 @@ export const validateList = expressValidation.validate({
     userId: Joi.string().required()
   }).required()
 })
+
+export const validateDelete = expressValidation.validate({
+  params: Joi.object({
+    id: Joi.string().required()
+  }).required()
+})
