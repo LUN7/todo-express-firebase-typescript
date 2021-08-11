@@ -137,6 +137,21 @@ describe('validate update request', () => {
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
+    it('should invoke next function if id is not provided', async () => {
+      const request = {
+        params: {
+        },
+        body: {
+          "name": "todo-1",
+          "deadline": "1628633684996"
+        }
+      } as unknown as express.Request
+      const mockNextFunction = jest.fn();
+      const mockResponse = {} as unknown as express.Response
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      expect(mockNextFunction.mock.calls.length).toBe(1)
+      expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
+    })
   })
   it('should invoke next function with error if userId is provided', async () => {
     const request = {
@@ -212,13 +227,34 @@ describe('validate retrieve request', () => {
     expect(mockNextFunction.mock.calls.length).toBe(1)
     expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
   })
-}
-)
-// describe('validate list request', () => {
-//   it('should not throw error if request body is correct', () => {
-//     requestValidator.validateCreate()
-//   })
-// })
+})
+
+describe('validate list request', () => {
+  it('should invoke next function if userId is provided', async () => {
+    const request = {
+      query: {
+        userId: "asdsa"
+      }
+    } as unknown as express.Request
+    const mockResponse = {} as unknown as express.Response
+    const mockNextFunction = jest.fn();
+    await requestValidator.validateList(request, mockResponse, mockNextFunction)
+    expect(mockNextFunction.mock.calls.length).toBe(1)
+    expect(mockNextFunction.mock.calls[0][0]).toBeNull()
+  })
+  it('should invoke next function with error if userId is not provided', async () => {
+    const request = {
+      params: {
+      }
+    } as unknown as express.Request
+    const mockResponse = {} as unknown as express.Response
+    const mockNextFunction = jest.fn();
+    await requestValidator.validateList(request, mockResponse, mockNextFunction)
+    expect(mockNextFunction.mock.calls.length).toBe(1)
+    expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
+  })
+})
+
 // describe('validate delete request', () => {
 //   it('should not throw error if request body is correct', () => {
 //     requestValidator.validateCreate()
