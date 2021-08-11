@@ -4,7 +4,7 @@ COPY package*.json .
 COPY yarn.lock .
 RUN yarn
 COPY . .
-EXPOSE 8080
+EXPOSE 8000
 
 FROM node:12 as test
 WORKDIR /usr/src/app
