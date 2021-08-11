@@ -79,5 +79,3 @@ All three test, development and production version of this project could be run 
 - 4. Go to project setting
 - 5. Click service account tag
 - 6. Click generate private key
-
-B.
