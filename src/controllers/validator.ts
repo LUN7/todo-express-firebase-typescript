@@ -7,3 +7,13 @@ export const validateCreate = expressValidation.validate({
     deadline: Joi.date().timestamp('javascript').required(),
   })
 })
+
+export const validateUpdate = expressValidation.validate({
+  params: Joi.object({
+    id: Joi.string().required()
+  }),
+  body: Joi.object({
+    name: Joi.string(),
+    deadline: Joi.date(),
+  })
+})
