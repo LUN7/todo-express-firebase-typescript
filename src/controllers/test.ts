@@ -244,7 +244,7 @@ describe('validate list request', () => {
   })
   it('should invoke next function with error if userId is not provided', async () => {
     const request = {
-      params: {
+      query: {
       }
     } as unknown as express.Request
     const mockResponse = {} as unknown as express.Response
