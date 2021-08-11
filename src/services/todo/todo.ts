@@ -1,7 +1,6 @@
 import * as todo from "interfaces/todo"
 import db from "database"
 import { firestore } from "firebase-admin"
-import * as uuid from "uuid"
 
 type IToDo = todo.IToDo
 const todoRef = db.collection('todo')
@@ -21,7 +20,7 @@ function serializer(snapshot: firestore.DocumentSnapshot) {
   }
   const data = snapshot.data() as Partial<Omit<IToDo, 'id' | 'created'>>
   const id = snapshot.id
-  const created = String(snapshot.createTime?.toDate())
+  const created = String(snapshot.createTime?.toDate().getTime())
   return {
     id,
     created,
