@@ -103,7 +103,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeNull()
     })
@@ -118,7 +118,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
@@ -133,7 +133,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
@@ -149,7 +149,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
@@ -165,7 +165,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
@@ -181,7 +181,7 @@ describe('validate update request', () => {
       } as unknown as express.Request
       const mockNextFunction = jest.fn();
       const mockResponse = {} as unknown as express.Response
-      requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
+      await requestValidator.validateUpdate(request, mockResponse, mockNextFunction)
       expect(mockNextFunction.mock.calls.length).toBe(1)
       expect(mockNextFunction.mock.calls[0][0]).toBeDefined()
     })
