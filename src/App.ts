@@ -37,7 +37,7 @@ export default class App {
     return this.listen()
   }
 
-  private listen(port = process.env.LISTEN_PORT || 3000) {
+  private listen(port = process.env.PORT || 3000) {
     this.app.on("error", (err) => {
       console.error(`App fail ${port}`);
       this.status = ServerStatus.Error;
@@ -60,12 +60,20 @@ export default class App {
   }
 
   private initializeErrorHandling() {
-    // TODO
+    this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      for (const controller of this.controllers) {
+        if (req.url.startsWith(controller.path)) {
+          controller.errorHandler(err, req, res, next)
+        }
+      }
+      console.log('uncaught exception', err.message)
+      return void res.send(400)
+    })
   }
 
   private initializeControllers(controllers: controller.Controller[]) {
     controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
+      this.app.use(controller.path, controller.router);
     });
   }
 }
