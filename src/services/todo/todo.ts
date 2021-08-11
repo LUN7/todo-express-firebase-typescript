@@ -1,9 +1,9 @@
-import * as todo from "interfaces/todo"
+import * as toDo from "interfaces/todo"
 import db from "database"
 import { firestore } from "firebase-admin"
 
-type IToDo = todo.IToDo
-const todoRef = db.collection('todo')
+type IToDo = toDo.IToDo
+const toDoRef = db.collection('todo')
 
 export class NotFoundError extends Error {
   constructor(objectName: string) {
@@ -29,37 +29,37 @@ function serializer(snapshot: firestore.DocumentSnapshot) {
 }
 
 interface IToDoServices {
-  create: (data: Omit<IToDo, 'id' | 'created'>) => Promise<todo.IToDo>
-  update: (id: string, data: Partial<Omit<IToDo, 'id' | 'created'>>) => Promise<todo.IToDo>
-  retrieve: (id: string) => Promise<todo.IToDo>
-  list: (userId: string) => Promise<todo.IToDo[]>
+  create: (data: Omit<IToDo, 'id' | 'created'>) => Promise<toDo.IToDo>
+  update: (id: string, data: Partial<Omit<IToDo, 'id' | 'created'>>) => Promise<toDo.IToDo>
+  retrieve: (id: string) => Promise<toDo.IToDo>
+  list: (userId: string) => Promise<toDo.IToDo[]>
   delete: (id: string) => Promise<void>
 }
 
 class ToDoServices implements IToDoServices {
   async create(data: Omit<IToDo, 'id' | 'created'>) {
-    const res = await todoRef.add(data)
-    const newToDoRef = todoRef.doc(res.id)
+    const res = await toDoRef.add(data)
+    const newToDoRef = toDoRef.doc(res.id)
     return serializer(await newToDoRef.get())
   }
   async update(id: string, data: Partial<Omit<IToDo, 'id' | 'created'>>) {
-    const updateToDoRef = todoRef.doc(id)
+    const updateToDoRef = toDoRef.doc(id)
     await updateToDoRef.update(data)
     return serializer(await updateToDoRef.get())
   }
   async retrieve(id: string) {
-    const retrieveToDoRef = todoRef.doc(id)
+    const retrieveToDoRef = toDoRef.doc(id)
     return serializer(await retrieveToDoRef.get())
   }
   async list(userId: string) {
-    const queryToDoRef = todoRef.where('userId', '==', userId);
+    const queryToDoRef = toDoRef.where('userId', '==', userId);
     const toDos = await queryToDoRef.get();
     const serializedToDo: IToDo[] = []
     toDos.forEach((toDo) => serializedToDo.push(serializer(toDo)))
     return serializedToDo
   }
   async delete(id: string) {
-    const deleteToDoRef = todoRef.doc(id)
+    const deleteToDoRef = toDoRef.doc(id)
     await deleteToDoRef.delete()
     return
   }

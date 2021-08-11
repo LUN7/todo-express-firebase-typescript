@@ -1,5 +1,5 @@
 import { Controller } from "interfaces/controller";
-import toDoService, { NotFoundError } from "services/todo"
+import toDoService, { NotFoundError } from "services/toDo"
 import * as express from "express"
 import * as requestValidator from "./validator"
 import catchException from "libs/expressErrorBoundary"

@@ -1,4 +1,4 @@
-import toDoService from './todo'
+import toDoService from './toDo'
 
 const TEST_USER_ID = "test-1212"
 const NOW = String(Date.now())
