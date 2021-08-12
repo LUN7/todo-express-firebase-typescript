@@ -44,6 +44,7 @@ class ToDoServices implements IToDoServices {
   }
   async update(id: string, data: Partial<Omit<IToDo, 'id' | 'created'>>) {
     const updateToDoRef = toDoRef.doc(id)
+    await updateToDoRef.get()
     await updateToDoRef.update(data)
     return serializer(await updateToDoRef.get())
   }
@@ -60,6 +61,7 @@ class ToDoServices implements IToDoServices {
   }
   async delete(id: string) {
     const deleteToDoRef = toDoRef.doc(id)
+    await deleteToDoRef.get()
     await deleteToDoRef.delete()
     return
   }
